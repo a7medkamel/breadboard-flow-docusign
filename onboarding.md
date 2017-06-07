@@ -57,7 +57,8 @@ module.exports = (req, res, next) => {
     }]
   };
 
-  this
+  req
+    .app
     .docusign
     .sendTemplate(payload)
     .asCallback(next);
@@ -86,7 +87,8 @@ module.exports = (req, res, next) => {
     }]
   };
 
-  this
+  req
+    .app
     .docusign
     .sendTemplate(payload)
     .return(req.body)
@@ -105,7 +107,9 @@ Notify HR of offer acceptance or rejection
 module.exports = (req, res, next) => {
   let { name, email } = req.body;
 
-  this.email({
+  req
+    .app
+    .email({
         to      : email
       , from    : 'hr@breadboard.io'
       , subject : `${name} accepted offer`
@@ -126,7 +130,9 @@ Notify Hiring Manager of offer acceptance or rejection
 module.exports = (req, res, next) => {
   let { name, manager : { phone } } = req.body;
 
-  this.sms({
+  req
+    .app
+    .sms({
         'to' : phone,
         'body' : `${name} will be joining your team`
       })
@@ -169,7 +175,9 @@ It's nice to show your new hires some love... Send them a gift, call them up, ..
 module.exports = (req, res, next) => {
   let { name, email, phone } = req.body;
 
-  this.phone({
+  req
+    .app
+    .phone({
         'to'    : phone,
         'twiml' : `<?xml version='1.0' encoding='UTF-8'?>
                   <Response>
