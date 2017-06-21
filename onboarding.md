@@ -109,7 +109,8 @@ module.exports = (req, res, next) => {
 
   req
     .app
-    .email({
+    .email
+    .send({
         to      : email
       , from    : 'hr@breadboard.io'
       , subject : `${name} accepted offer`
@@ -132,7 +133,8 @@ module.exports = (req, res, next) => {
 
   req
     .app
-    .sms({
+    .sms
+    .send({
         'to' : phone,
         'body' : `${name} will be joining your team`
       })
@@ -177,7 +179,8 @@ module.exports = (req, res, next) => {
 
   req
     .app
-    .phone({
+    .phone
+    .send({
         'to'    : phone,
         'twiml' : `<?xml version='1.0' encoding='UTF-8'?>
                   <Response>
